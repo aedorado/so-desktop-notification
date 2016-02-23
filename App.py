@@ -31,8 +31,10 @@ class App():
 
         self.label.bind("<Button-1>", self.bopen)
         
-        self.root.after(7500, lambda: self.root.destroy())
+        self.root.after(5000, lambda: self.root.destroy())
         self.url = labeltext[labeltext.find('\n') + 1:]
+        self.root.lift()
+        self.root.call('wm', 'attributes', '.', '-topmost', True)
         self.root.mainloop()
 
     def closeSelf(self):
