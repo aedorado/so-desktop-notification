@@ -3,7 +3,7 @@ from threading import *
 import tkMessageBox
 import webbrowser
 
-class App(Thread):
+class App():
 
     w = 400
     h = 100
@@ -31,10 +31,9 @@ class App(Thread):
 
         self.label.bind("<Button-1>", self.bopen)
         
-        self.root.after(5000, lambda: self.root.destroy())
+        self.root.after(7500, lambda: self.root.destroy())
         self.url = labeltext[labeltext.find('\n') + 1:]
         self.root.mainloop()
-        # Thread.__init__(self)
 
     def closeSelf(self):
         self.root.destroy()
