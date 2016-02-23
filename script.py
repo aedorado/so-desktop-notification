@@ -2,15 +2,8 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
-import notify2
 
-def display_notification(title, message):
-    notify2.init("Init")
-    notice = notify2.Notification(title, message)
-    notice.show()
-    sleep(4)
-    notice.close()
-    return
+from App import *
 
 def is_valid_syntax(argv):
     if len(sys.argv) < 2:
@@ -39,10 +32,11 @@ def get_question_from_tag(tag, last_ques):
         r = requests.get(url)
     soup = BeautifulSoup(r.text, "html.parser")
     data = soup.find_all("link")
-    question = data[2].get('href')
-    question = question[question.find('questions') + 19:]
+    qurl = data[2].get('href')
+    print qurl
+    question = qurl[qurl.find('questions') + 19:]
     if last_ques[str(tag)] != str(question):
-        display_notification("Question %s: " % tag.upper(), question)
+        app = App(question)
 
 def main(argv):
     if is_valid_syntax(argv):
