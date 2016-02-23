@@ -1,10 +1,12 @@
 from Tkinter import *
 from threading import *
+import tkMessageBox
+import webbrowser
 
 class App(Thread):
 
     w = 400
-    h = 85
+    h = 100
     bgColor = '#77216F'
 
     def __init__(self, labeltext):
@@ -20,29 +22,28 @@ class App(Thread):
         # set the dimensions of the screen and where it is placed
         self.root.geometry('%dx%d+%d+%d' % (self.w, self.h, ws - self.w, 0))
 
-        # self.frame = Frame(self.root, width=self.w, height=self.h, borderwidth=2, relief=RAISED)
-        # self.frame.pack_propagate(False)
-        # self.frame.pack()
-        # self.frame.configure(background = '#77216F')
-
         self.label = Label(self.root, text=labeltext, fg='#ffffff', bg=self.bgColor, wraplength=350)
         self.label.pack(pady=20)
 
         self.bQuit = Button(self.root, text="X", command=self.root.quit)
         self.bQuit.place(x=375, y=0, height=25, width=25)
         self.bQuit.configure(background = '#77216F')
-        # self.bHello = Button(self.frame, text="Hello", command=self.hello)
-        # self.bHello.pack(pady=20)
+
+        self.root.bind("<Button-1>", self.bopen)
+
+        # self.bHello = Button(self.root, text="Hello", command=self.bopen)
+        # self.bHello.place(x=0, y=0, height=25, width=25)
         
         # self.root.after(8000, self.closeSelf)
-        self.root.after(1500, lambda: self.root.destroy())
+        self.root.after(5000, lambda: self.root.destroy())
+        self.url = labeltext[labeltext.find('\n') + 1:]
         self.root.mainloop()
         # Thread.__init__(self)
 
     def closeSelf(self):
         self.root.destroy()
 
-    def hello(self):
-        tkMessageBox.showinfo("Popup", "Hello!")
+    def bopen(self, event):
+        webbrowser.open(self.url)
 
 # app = App('hello').root.mainloop()
