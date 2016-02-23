@@ -16,7 +16,7 @@ class App(Thread):
         self.root.configure(background=self.bgColor)
 
         # get screen width and height
-        ws = self.root.winfo_screenwidth() # width of the screen
+        ws = self.root.winfo_screenwidth()  # width of the screen
         hs = self.root.winfo_screenheight() # height of the screen
 
         # set the dimensions of the screen and where it is placed
@@ -25,16 +25,12 @@ class App(Thread):
         self.label = Label(self.root, text=labeltext, fg='#ffffff', bg=self.bgColor, wraplength=350)
         self.label.pack(pady=20)
 
-        self.bQuit = Button(self.root, text="X", command=self.root.quit)
+        self.bQuit = Button(self.root, text="X", command=self.closeSelf)
         self.bQuit.place(x=375, y=0, height=25, width=25)
         self.bQuit.configure(background = '#77216F')
 
-        self.root.bind("<Button-1>", self.bopen)
-
-        # self.bHello = Button(self.root, text="Hello", command=self.bopen)
-        # self.bHello.place(x=0, y=0, height=25, width=25)
+        self.label.bind("<Button-1>", self.bopen)
         
-        # self.root.after(8000, self.closeSelf)
         self.root.after(5000, lambda: self.root.destroy())
         self.url = labeltext[labeltext.find('\n') + 1:]
         self.root.mainloop()
