@@ -4,7 +4,7 @@ from threading import *
 class App(Thread):
 
     w = 400
-    h = 100
+    h = 85
     bgColor = '#77216F'
 
     def __init__(self, labeltext):
@@ -25,7 +25,7 @@ class App(Thread):
         # self.frame.pack()
         # self.frame.configure(background = '#77216F')
 
-        self.label = Label(self.root, text=labeltext, fg='#ffffff', bg=self.bgColor)
+        self.label = Label(self.root, text=labeltext, fg='#ffffff', bg=self.bgColor, wraplength=350)
         self.label.pack(pady=20)
 
         self.bQuit = Button(self.root, text="X", command=self.root.quit)
@@ -35,7 +35,7 @@ class App(Thread):
         # self.bHello.pack(pady=20)
         
         # self.root.after(8000, self.closeSelf)
-        self.root.after(15000, lambda: self.root.destroy())
+        self.root.after(1500, lambda: self.root.destroy())
         self.root.mainloop()
         # Thread.__init__(self)
 

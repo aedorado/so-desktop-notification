@@ -36,7 +36,7 @@ def get_question_from_tag(tag, last_ques):
     print qurl
     question = qurl[qurl.find('questions') + 19:]
     if last_ques[str(tag)] != str(question):
-        app = App(question)
+        app = App(tag.upper() + '\n' + qurl)
 
 def main(argv):
     if is_valid_syntax(argv):
@@ -48,9 +48,9 @@ def main(argv):
                     tags.append(i)
                     last_ques[str(i)] = ' '
             while True:
-                for i in tags:
-                    get_question_from_tag(i, last_ques)
-                sleep(60)
+                for tag in tags:
+                    get_question_from_tag(tag, last_ques)
+                sleep(2)
         except KeyboardInterrupt:
             sys.stderr.write('\nBye \n')
             return True
