@@ -50,7 +50,7 @@ def main(argv):
             while True:
                 for tag in tags:
                     get_question_from_tag(tag, last_ques)
-                sleep(10)
+                sleep(60)
         except KeyboardInterrupt:
             sys.stderr.write('\nBye \n')
             return True

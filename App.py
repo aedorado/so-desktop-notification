@@ -1,6 +1,4 @@
 from Tkinter import *
-from threading import *
-import tkMessageBox
 import webbrowser
 
 class App():
@@ -13,14 +11,14 @@ class App():
 
         self.root = Tk()
         self.root.overrideredirect(1)
-        self.root.configure(background=self.bgColor)
+        self.root.configure(background=self.bgColor)    # setting background color
 
         # get screen width and height
         ws = self.root.winfo_screenwidth()  # width of the screen
         hs = self.root.winfo_screenheight() # height of the screen
 
         # set the dimensions of the screen and where it is placed
-        self.root.geometry('%dx%d+%d+%d' % (self.w, self.h, ws - self.w, 0))
+        self.root.geometry('%dx%d+%d+%d' % (self.w, self.h, ws - self.w - 25, 40))
 
         self.label = Label(self.root, text=labeltext, fg='#ffffff', bg=self.bgColor, wraplength=350)
         self.label.pack(pady=20)
@@ -31,7 +29,7 @@ class App():
 
         self.label.bind("<Button-1>", self.bopen)
         
-        self.root.after(5000, lambda: self.root.destroy())
+        self.root.after(7500, lambda: self.root.destroy())
         self.url = labeltext[labeltext.find('\n') + 1:]
         self.root.lift()
         self.root.call('wm', 'attributes', '.', '-topmost', True)
@@ -42,5 +40,6 @@ class App():
 
     def bopen(self, event):
         webbrowser.open(self.url)
+        self.closeSelf()
 
 # app = App('hello').root.mainloop()
